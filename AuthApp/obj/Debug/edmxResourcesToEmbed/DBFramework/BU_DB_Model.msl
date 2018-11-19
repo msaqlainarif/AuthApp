@@ -14,7 +14,6 @@
     <EntitySetMapping Name="AspNetRoles">
       <EntityTypeMapping TypeName="BU_DB_Model.AspNetRole">
         <MappingFragment StoreEntitySet="AspNetRoles">
-          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>

@@ -79,6 +79,15 @@ namespace AuthApp.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Address { get; set; }
+        [Required]
+        [Display(Name = "Department")]
+        public int DeptId { get; set; }
+        public string RoleId { get; set; }  
     }
 
     public class ResetPasswordViewModel

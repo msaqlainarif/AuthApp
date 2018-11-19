@@ -20,14 +20,5 @@ namespace AuthApp.Models
         [Display(Name = "Campus")]
         public int CampusId { get; set; }
     }
-    public class CampusViewModel{
-
-        [Required]
-        [Display(Name = "Name")]
-        public string Name { get; set; }
-
-        [Required]
-        [Display(Name = "Campus Code")]
-        public string CampusCode { get; set; }
-    } 
+    
 }

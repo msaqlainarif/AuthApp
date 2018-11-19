@@ -118,3 +118,5 @@ C:\Users\Open Source\source\repos\AuthApp\AuthApp\obj\Debug\AuthApp.csproj.CoreC
 C:\Users\Open Source\source\repos\AuthApp\AuthApp\obj\Debug\AuthApp.csproj.CopyComplete
 C:\Users\Open Source\source\repos\AuthApp\AuthApp\obj\Debug\AuthApp.dll
 C:\Users\Open Source\source\repos\AuthApp\AuthApp\obj\Debug\AuthApp.pdb
+C:\Users\Open Source\source\repos\AuthApp\AuthApp\obj\Debug\AuthApp.Migrations._RolesMigration.resources
+C:\Users\Open Source\source\repos\AuthApp\AuthApp\obj\Debug\AuthApp.csproj.GenerateResource.cache

@@ -37,7 +37,6 @@
     </Key>
     <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Name="DepartmentId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="AspNetUsers" Relationship="BU_DB_Model.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
   </EntityType>
   <EntityType Name="AspNetUserClaim">

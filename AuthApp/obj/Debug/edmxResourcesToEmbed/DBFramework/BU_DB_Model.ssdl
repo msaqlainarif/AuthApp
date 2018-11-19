@@ -16,7 +16,6 @@
     </Key>
     <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
-    <Property Name="DepartmentId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="AspNetUserClaims">
     <Key>

@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using AuthApp.Models;
+using AuthApp.DBFramework;
 
 namespace AuthApp.Controllers
 {
@@ -17,6 +18,7 @@ namespace AuthApp.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationRoleManager _roleManager;
 
         public AccountController()
         {
@@ -26,10 +28,23 @@ namespace AuthApp.Controllers
             return View();
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager,ApplicationRoleManager roleManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            RoleManager = roleManager;
+        }
+
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+            }
+            private set
+            {
+                _roleManager = value;
+            }
         }
 
         public ApplicationSignInManager SignInManager
@@ -143,6 +158,9 @@ namespace AuthApp.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            BU_DB db = new BU_DB();
+            ViewBag.DepartmentsList = db.Departments.ToList();
+            ViewBag.RolesList = db.AspNetRoles.ToList();
             return View();
         }
 
@@ -156,9 +174,16 @@ namespace AuthApp.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.Address = model.Address;
+                user.DeptId = model.DeptId;
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    result=await UserManager.AddToRoleAsync(user.Id, model.RoleId);
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -173,6 +198,9 @@ namespace AuthApp.Controllers
             }
 
             // If we got this far, something failed, redisplay form
+            BU_DB db = new BU_DB();
+            ViewBag.DepartmentsList = db.Departments.ToList();
+            ViewBag.RolesList = db.AspNetRoles.ToList();
             return View(model);
         }
 
