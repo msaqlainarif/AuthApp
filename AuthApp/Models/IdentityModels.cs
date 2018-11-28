@@ -24,6 +24,9 @@ namespace AuthApp.Models
         [Required]
         [Display(Name = "Department")]
         public int DeptId { get; set; }
+        public int? IsActive { get; set; }
+        [Display(Name = "Full Name")]
+        public string Fullname { get { return string.Format("{0} {1}", FirstName, LastName); } }
     }
     public class ApplicationRole : IdentityRole
     {
@@ -41,7 +44,8 @@ namespace AuthApp.Models
 
         static ApplicationDbContext()
         {
-            Database.SetInitializer<ApplicationDbContext>(new ApplicationDbInitializer());
+            //new ApplicationDbInitializer()
+            Database.SetInitializer<ApplicationDbContext>(null);
         }
 
         public static ApplicationDbContext Create()

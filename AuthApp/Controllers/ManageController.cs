@@ -7,6 +7,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using AuthApp.Models;
+using System.Net;
+using AuthApp.DBFramework;
 
 namespace AuthApp.Controllers
 {
@@ -15,6 +17,7 @@ namespace AuthApp.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private BU_DB db = new BU_DB();
 
         public ManageController()
         {
@@ -52,30 +55,70 @@ namespace AuthApp.Controllers
 
         //
         // GET: /Manage/Index
-        public async Task<ActionResult> Index(ManageMessageId? message)
+        public ActionResult Index()
         {
-            ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
-                : "";
-
-            var userId = User.Identity.GetUserId();
-            var model = new IndexViewModel
+            return View(UserManager.Users);
+        }
+        //GET: /Manage/EditUser
+        public async Task<ActionResult> EditUser(string id) {
+            if (id == null)
             {
-                HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
-            };
-            return View(model);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var user = await UserManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            RegisterViewModel userModel = new RegisterViewModel { Id=user.Id,FirstName=user.FirstName,LastName=user.LastName,Address=user.Address,Email=user.Email,DeptId=user.DeptId,IsActive=user.IsActive };
+
+            var list = new SelectList(new[]
+            {
+                new { ID = "0", Name = "In-Active" },
+                new { ID = "1", Name = "Active" },
+                new { ID = "2", Name = "Block" },
+            },
+            "ID", "Name",1);
+
+            ViewData["list"] = list;
+
+            ViewBag.DepartmentsList = db.Departments.ToList();
+            return View(userModel);
         }
 
-        //
+        // POST: /Manage/EditUser
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditUser([Bind(Include = "FirstName,LastName,Address,Email,IsActive,Id,DeptId")] RegisterViewModel regModel)
+        {
+            ModelState.Remove("Password");
+            ModelState.Remove("ConfirmPassword");
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByIdAsync(regModel.Id);
+                user.FirstName= regModel.FirstName;
+                user.LastName = regModel.LastName;
+                user.Email = regModel.Email;
+                user.Address = regModel.Address;
+                user.DeptId = regModel.DeptId;
+                user.IsActive = regModel.IsActive;
+                
+                await UserManager.UpdateAsync(user);
+                return RedirectToAction("Index");
+            }
+            var list = new SelectList(new[]
+            {
+                new { ID = "0", Name = "In-Active" },
+                new { ID = "1", Name = "Active" },
+                new { ID = "2", Name = "Block" },
+            },
+            "ID", "Name", 1);
+
+            ViewData["list"] = list;
+            ViewBag.DepartmentsList = db.Departments.ToList();
+            return View();
+        }
+
         // POST: /Manage/RemoveLogin
         [HttpPost]
         [ValidateAntiForgeryToken]

@@ -57,7 +57,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="icon-user-follow"></i></span>
                                 </div>
-                                @Html.DropDownListFor(model => model.RoleId, new SelectList(ViewBag.RolesList as System.Collections.IEnumerable, "Id", "Name"), "Select Role", new { @class = "form-control" })
+                                @Html.DropDownListFor(model => model.RoleId, new SelectList(ViewBag.RolesList as System.Collections.IEnumerable, "Name", "Name"), "Select Role", new { @class = "form-control" })
                             </div>
 
                             <div class="input-group mb-3">

@@ -31,6 +31,8 @@ namespace AuthApp.DBFramework
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Campus> Campuses { get; set; }
+        public virtual DbSet<Consultant> Consultants { get; set; }
+        public virtual DbSet<Contractor> Contractors { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
     }
 }

@@ -27,6 +27,40 @@
                             <i class="fa fa-arrow-right" aria-hidden="true"></i> Roles
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Index","Consultants")">
+                            <i class="fa fa-arrow-right" aria-hidden="true"></i> Consultants
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Index","Contractors")">
+                            <i class="fa fa-arrow-right" aria-hidden="true"></i> Contractors
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index","Manage")">
+                    <i class="nav-icon icon-user"></i> Users
+                </a>
+            </li>
+
+            <li class="nav-item nav-dropdown">
+                <a class="nav-link nav-dropdown-toggle" href="#">
+                    <i class="fa fa-cog" aria-hidden="true"></i> Settings
+                </a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Index","Manage")">
+                            <i class="fa fa-arrow-right" aria-hidden="true"></i> Change Profile
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("ChangePassword","Manage")">
+                            <i class="fa fa-arrow-right" aria-hidden="true"></i> Change Password
+                        </a>
+                    </li>
                 </ul>
             </li>
 

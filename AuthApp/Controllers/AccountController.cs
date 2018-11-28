@@ -179,6 +179,7 @@ namespace AuthApp.Controllers
                 user.LastName = model.LastName;
                 user.Address = model.Address;
                 user.DeptId = model.DeptId;
+                user.IsActive = 0;
 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

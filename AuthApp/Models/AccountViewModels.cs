@@ -64,6 +64,8 @@ namespace AuthApp.Models
 
     public class RegisterViewModel
     {
+        public string Id { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -87,7 +89,10 @@ namespace AuthApp.Models
         [Required]
         [Display(Name = "Department")]
         public int DeptId { get; set; }
-        public string RoleId { get; set; }  
+        public string RoleId { get; set; }
+        [Required]
+        [Display(Name = "Status")]
+        public int? IsActive { get; set; } = 0;        
     }
 
     public class ResetPasswordViewModel

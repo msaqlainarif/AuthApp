@@ -197,6 +197,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CampusController.cs" />
+    <Compile Include="Controllers\ConsultantsController.cs" />
+    <Compile Include="Controllers\ContractorsController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -231,6 +233,12 @@
     <Compile Include="DBFramework\Campus.cs">
       <DependentUpon>BU_DB_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBFramework\Consultant.cs">
+      <DependentUpon>BU_DB_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBFramework\Contractor.cs">
+      <DependentUpon>BU_DB_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBFramework\C__MigrationHistory.cs">
       <DependentUpon>BU_DB_Model.tt</DependentUpon>
     </Compile>
@@ -243,6 +251,10 @@
     <Compile Include="Migrations\201811191024349__RolesMigration.cs" />
     <Compile Include="Migrations\201811191024349__RolesMigration.Designer.cs">
       <DependentUpon>201811191024349__RolesMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811200615172__IsActiveUser.cs" />
+    <Compile Include="Migrations\201811200615172__IsActiveUser.Designer.cs">
+      <DependentUpon>201811200615172__IsActiveUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -910,6 +922,18 @@
     <Content Include="Views\Role\Details.cshtml" />
     <Content Include="Views\Role\Edit.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Shared\_Aside.cshtml" />
+    <Content Include="Views\Manage\EditUser.cshtml" />
+    <Content Include="Views\Consultants\Create.cshtml" />
+    <Content Include="Views\Consultants\Delete.cshtml" />
+    <Content Include="Views\Consultants\Details.cshtml" />
+    <Content Include="Views\Consultants\Edit.cshtml" />
+    <Content Include="Views\Consultants\Index.cshtml" />
+    <Content Include="Views\Contractors\Create.cshtml" />
+    <Content Include="Views\Contractors\Delete.cshtml" />
+    <Content Include="Views\Contractors\Details.cshtml" />
+    <Content Include="Views\Contractors\Edit.cshtml" />
+    <Content Include="Views\Contractors\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -917,6 +941,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201811191024349__RolesMigration.resx">
       <DependentUpon>201811191024349__RolesMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811200615172__IsActiveUser.resx">
+      <DependentUpon>201811200615172__IsActiveUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

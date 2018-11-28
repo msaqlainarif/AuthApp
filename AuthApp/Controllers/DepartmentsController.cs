@@ -112,6 +112,10 @@ namespace AuthApp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Department department = db.Departments.Find(id);
+            if (department == null)
+            {
+                return HttpNotFound();
+            }
             db.Departments.Remove(department);
             db.SaveChanges();
             return RedirectToAction("Index");
